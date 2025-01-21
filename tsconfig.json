@@ -12,8 +12,11 @@
 		"strict": true,
 		"baseUrl": ".",
 		"paths": {
+			"$assets/*": ["src/lib/assets/*"],
 			"$components": ["src/lib/components/index.ts"],
-			"$utils": ["src/lib/utils/index.ts"]
+			"$constants": ["src/lib/constants/index.ts"],
+			"$types": ["src/lib/types/index.ts"],
+			"$utils": ["src/lib/utils/index.ts"],
 		}
 	}
 }
