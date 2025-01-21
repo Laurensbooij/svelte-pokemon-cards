@@ -1,0 +1,76 @@
+:root {
+	/* Color variables */
+	--colors-primary: rgba(59, 76, 202, 1);
+	--colors-primary-light: rgba(163, 185, 248, 1);
+	--colors-primary-dark: rgba(42, 58, 140, 1);
+
+	--colors-secondary: rgba(100, 150, 200, 1);
+	--colors-secondary-light: rgba(130, 180, 230, 1);
+	--colors-secondary-dark: rgba(70, 120, 170, 1);
+
+	--colors-tertiary-primary: rgba(248, 208, 48, 1);
+	--colors-tertiary-light: rgba(255, 223, 128, 1);
+	--colors-tertiary-dark: rgba(204, 153, 0, 1);
+
+	--colors-default-0: rgba(255, 255, 255, 1);
+	--colors-default-100: rgba(248, 249, 250, 1);
+	--colors-default-200: rgba(233, 236, 239, 1);
+	--colors-default-300: rgba(222, 226, 230, 1);
+	--colors-default-400: rgba(206, 212, 218, 1);
+	--colors-default-500: rgba(173, 181, 189, 1);
+	--colors-default-600: rgba(108, 117, 125, 1);
+	--colors-default-700: rgba(73, 80, 87, 1);
+	--colors-default-800: rgba(52, 58, 64, 1);
+	--colors-default-900: rgba(33, 37, 41, 1);
+
+	--colors-text-dark: rgba(33, 33, 33);
+	--colors-text-light: var(--colors-default-0);
+	--colors-border: var(--colors-default-300);
+
+	/* Font variables */
+	--font-family-base: Courier, monospace;
+	--font-size-base: 1rem;
+	--font-weight-normal: 400;
+	--font-weight-bold: 700;
+
+	/* Spacing variables */
+	--spacing-4: 0.25rem;
+	--spacing-8: 0.5rem;
+	--spacing-12: 0.75rem;
+	--spacing-16: 1rem;
+	--spacing-20: 1.25rem;
+	--spacing-24: 1.5rem;
+
+	/* Border radius */
+	--border-radius-sm: 4px;
+	--border-radius-md: 8px;
+	--border-radius-lg: 12px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-family-base);
+	background: var(--colors-background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-family: var(--font-family-base);
+	color: var(--colors-text-dark);
+}
+
+p {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-normal);
+}
