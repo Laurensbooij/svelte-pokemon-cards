@@ -1,3 +1,43 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { type NamedAPIResource } from 'pokenode-ts'
+
+	import { PokemonCard, Sidebar } from '$components'
+
+	import { type PageProps } from './$types'
+
+	let { data }: PageProps = $props()
+	let { pokemons, error } = data
+
+	let selectedPokemon = $state<NamedAPIResource>()
+
+	const onPokemonSelectHandler = (pokemon: NamedAPIResource) => {
+		selectedPokemon = pokemon
+	}
+</script>
+
+<div class="container">
+	{#if error || !pokemons}
+		<p>Error: error</p>
+	{:else}
+		<Sidebar {pokemons} {selectedPokemon} onPokemonSelect={onPokemonSelectHandler} />
+		<div class="content-container">
+			<PokemonCard pokemon={selectedPokemon} />
+		</div>
+	{/if}
+</div>
+
+<style>
+	.container {
+		display: flex;
+		overflow: hidden;
+	}
+
+	.content-container {
+		display: flex;
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		padding: var(--spacing-24);
+		background: var(--colors-default-25);
+	}
+</style>
