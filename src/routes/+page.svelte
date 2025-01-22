@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type NamedAPIResource } from 'pokenode-ts'
 
-	import { PokemonCard, Sidebar } from '$components'
+	import { PokemonCard, Menu } from '$components'
 
 	import { type PageProps } from './$types'
 
@@ -17,9 +17,11 @@
 
 <div class="container">
 	{#if error || !pokemons}
-		<p>Error: error</p>
+		<div class="error-container">
+			<p>Error loading Pokemon, please try again.</p>
+		</div>
 	{:else}
-		<Sidebar {pokemons} {selectedPokemon} onPokemonSelect={onPokemonSelectHandler} />
+		<Menu {pokemons} {selectedPokemon} onPokemonSelect={onPokemonSelectHandler} />
 		<div class="content-container">
 			<PokemonCard pokemon={selectedPokemon} />
 		</div>
@@ -32,6 +34,15 @@
 		overflow: hidden;
 	}
 
+	.error-container {
+		display: flex;
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		padding: var(--spacing-24);
+		background: var(--colors-error-50);
+	}
+
 	.content-container {
 		display: flex;
 		flex: 1;
@@ -39,5 +50,16 @@
 		align-items: center;
 		padding: var(--spacing-24);
 		background: var(--colors-default-25);
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			position: relative;
+			flex-direction: column;
+		}
+
+		.content-container {
+			order: -1;
+		}
 	}
 </style>

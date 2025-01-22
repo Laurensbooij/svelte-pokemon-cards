@@ -2,7 +2,7 @@
 	import ClearIcon from '$assets/vectors/clear.svg'
 	import SearchIcon from '$assets/vectors/search.svg'
 
-	let { value = $bindable() } = $props()
+	let { value = $bindable(), onFocus } = $props()
 
 	const onInputClearHandler = () => {
 		value = ''
@@ -11,7 +11,13 @@
 
 <div class="searchbar-container">
 	<img class="search-icon" src={SearchIcon} alt="Search icon" />
-	<input class="searchbar" type="search" placeholder="Search for a pokemon.." bind:value />
+	<input
+		bind:value
+		class="searchbar"
+		onfocus={onFocus}
+		placeholder="Search for a pokemon.."
+		type="search"
+	/>
 	{#if value}
 		<button class="clear-button" onclick={onInputClearHandler}>
 			<img src={ClearIcon} alt="Clear search" />
@@ -23,6 +29,7 @@
 	.searchbar-container {
 		position: relative;
 		width: 100%;
+		max-width: 30rem;
 	}
 
 	.search-icon {

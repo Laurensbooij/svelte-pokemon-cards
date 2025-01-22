@@ -13,30 +13,45 @@
 
 	let { pokemons, selectedPokemon, onPokemonSelect }: SidebarProps = $props()
 	let searchValue = $state('')
+	let mobileMenuIsOpen = $state(false)
+
 	let filteredPokemons = $derived(filterPokemonByName(pokemons, searchValue))
+
+	const onSearchbarFocusHandler = () => {
+		mobileMenuIsOpen = true
+	}
+
+	const onPokemonSelectHandler = (pokemon: NamedAPIResource) => {
+		onPokemonSelect(pokemon)
+		mobileMenuIsOpen = false
+	}
 </script>
 
-<div class="sidebar-container">
+<div class={['menu-container', { 'mobile-menu-open': mobileMenuIsOpen }]}>
 	<div class="searchbar-container">
-		<div class="searchbar-wrapper">
-			<Searchbar bind:value={searchValue} />
-		</div>
+		<Searchbar bind:value={searchValue} onFocus={onSearchbarFocusHandler} />
 	</div>
 	<div class="pokemons-list">
-		{#each filteredPokemons as pokemon}
-			<button
-				class="pokemon-item"
-				class:selected={pokemon.name === selectedPokemon?.name}
-				onclick={() => onPokemonSelect(pokemon)}
-			>
-				<p>{capitalizeString(pokemon.name)}</p>
-			</button>
-		{/each}
+		{#if filteredPokemons.length === 0}
+			<div class="no-results-message-container">
+				<p>No Pokemon found, try a different search term.</p>
+			</div>
+		{:else}
+			{#each filteredPokemons as pokemon}
+				<button
+					class="pokemon-item"
+					class:selected={pokemon.name === selectedPokemon?.name}
+					onclick={() => onPokemonSelectHandler(pokemon)}
+				>
+					<p>{capitalizeString(pokemon.name)}</p>
+				</button>
+			{/each}
+		{/if}
 	</div>
 </div>
 
 <style>
-	.sidebar-container {
+	.menu-container {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -54,8 +69,22 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
+		height: 100%;
 		padding: var(--spacing-16) var(--spacing-12);
+		background: var(--colors-default-0);
 		overflow-y: scroll;
+
+		.no-results-message-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+
+			p {
+				margin: 0;
+				text-align: center;
+			}
+		}
 	}
 
 	.pokemon-item {
@@ -90,6 +119,35 @@
 
 		p {
 			margin: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.menu-container {
+			width: 100%;
+			height: auto;
+			border-right: none;
+
+			.searchbar-container {
+				display: flex;
+				justify-content: center;
+				border-top: 1px solid var(--colors-border);
+			}
+
+			.pokemons-list {
+				display: none;
+				order: -1;
+			}
+		}
+
+		.menu-container.mobile-menu-open {
+			z-index: 2;
+			position: absolute;
+			height: 100%;
+
+			.pokemons-list {
+				display: flex;
+			}
 		}
 	}
 </style>
