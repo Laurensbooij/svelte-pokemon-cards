@@ -1,3 +1,7 @@
+# Svelte App: Pokemon cards
+
+<img src="./static/images/app-screenshot.png" alt="App screenshot showing Pikachu" width="480"/>
+
 ## About this project
 
 This project is built using SvelteKit, and displays Pokemon cards using data fetched from the [PokéApi](https://pokeapi.co/). You can search a list of Pokemon and pick one. The data for this Pokemon is then loaded and displayed in a Pokemon card.
